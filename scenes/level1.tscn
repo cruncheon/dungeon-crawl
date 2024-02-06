@@ -533,12 +533,12 @@ light_color = Color(1, 0.286275, 0.278431, 1)
 omni_range = 3.0
 
 [node name="OmniLight7" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -10)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.0999, 0, -10)
 light_color = Color(0, 1, 0.329412, 1)
 omni_range = 6.0
 
 [node name="OmniLight8" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -13.9888)
 light_color = Color(0.413378, 0.00126362, 0.607806, 1)
 omni_range = 6.0
 
@@ -557,7 +557,7 @@ libraries = {
 shape = SubResource("3")
 
 [node name="L" type="Node3D" parent="Doors/Door1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.996853, 0, 1)
 
 [node name="Mesh" type="MeshInstance3D" parent="Doors/Door1/L"]
 transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0.5, 0, 0)
@@ -587,7 +587,7 @@ libraries = {
 shape = SubResource("3")
 
 [node name="L" type="Node3D" parent="Doors/Door2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.995819, 0, 1)
 
 [node name="Mesh" type="MeshInstance3D" parent="Doors/Door2/L"]
 transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0.5, 0, 0)
@@ -617,7 +617,7 @@ libraries = {
 shape = SubResource("3")
 
 [node name="L" type="Node3D" parent="Doors/Door3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.996024, 0, 1)
 
 [node name="Mesh" type="MeshInstance3D" parent="Doors/Door3/L"]
 transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0.5, 0, 0)
