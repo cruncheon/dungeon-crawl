@@ -8,7 +8,6 @@ extends "res://addons/level_block/level_block_node.gd"
 func interact():
 	if west_face == 7:
 		self.west_face = 8
-		self.bottom_face = -1
 		
 		## Light Up Hallway
 		$"../../Lights/OmniLight2".light_color = Color("ffdabf")
@@ -22,7 +21,6 @@ func interact():
 		
 	elif west_face == 8:
 		self.west_face = 7
-		self.bottom_face = 5
 		
 		## Revert Hallway lights
 		$"../../Lights/OmniLight2".light_color = Color("ff4947")
