@@ -1,0 +1,635 @@
+[gd_scene load_steps=18 format=3 uid="uid://dpsaib3a8pgyg"]
+
+[ext_resource type="PackedScene" uid="uid://bfwtdy5wmw3ve" path="res://scenes/entity/player.tscn" id="1_3wvre"]
+[ext_resource type="Script" path="res://addons/level_block/level_block_node.gd" id="2_4f1nn"]
+[ext_resource type="Material" uid="uid://c71yladfjhgud" path="res://addons/level_block/default_material.tres" id="3_twohx"]
+[ext_resource type="Texture2D" uid="uid://dul4gcwu55m0b" path="res://addons/level_block/example_tileset.png" id="4_1w3c7"]
+[ext_resource type="Texture2D" uid="uid://bly3ltto83k3r" path="res://assets/tileset.png" id="5_mcnmu"]
+[ext_resource type="Script" path="res://scenes/entity/button_block2.gd" id="6_o7oc8"]
+[ext_resource type="Script" path="res://scenes/entity/button_block1.gd" id="6_y710u"]
+[ext_resource type="Script" path="res://scenes/entity/door.gd" id="7_o43el"]
+
+[sub_resource type="Sky" id="1"]
+
+[sub_resource type="Environment" id="2"]
+background_mode = 1
+sky = SubResource("1")
+
+[sub_resource type="Animation" id="7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("L:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("R:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="8"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("L:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 89, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("R:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -89, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_06ubn"]
+_data = {
+"RESET": SubResource("7"),
+"open": SubResource("8")
+}
+
+[sub_resource type="BoxShape3D" id="3"]
+
+[sub_resource type="QuadMesh" id="4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pyiqm"]
+cull_mode = 2
+specular_mode = 2
+albedo_texture = ExtResource("5_mcnmu")
+metallic_specular = 0.0
+uv1_scale = Vector3(0.125, 0.25, 0.25)
+uv1_offset = Vector3(1.75, 0, 0)
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bsl20"]
+cull_mode = 2
+specular_mode = 2
+albedo_texture = ExtResource("5_mcnmu")
+metallic_specular = 0.0
+uv1_scale = Vector3(0.125, 0.25, 0.25)
+uv1_offset = Vector3(1.875, 0, 0)
+texture_filter = 0
+
+[node name="Level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("2")
+
+[node name="Player" parent="." instance=ExtResource("1_3wvre")]
+
+[node name="Blocks" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00307655, 0, 0.00391865)
+
+[node name="LevelBlock01" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("4_1w3c7")
+north_face = 1
+west_face = 0
+top_face = 5
+bottom_face = 4
+generate_occluders = true
+
+[node name="LevelBlock02" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+top_face = 5
+bottom_face = 4
+generate_occluders = true
+
+[node name="LevelBlock03" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+north_face = 2
+east_face = 0
+top_face = 5
+bottom_face = 4
+generate_occluders = true
+
+[node name="ButtonBlock1" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+script = ExtResource("6_y710u")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+east_face = 7
+top_face = 5
+bottom_face = 4
+
+[node name="LevelBlock05" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+east_face = 0
+south_face = 0
+top_face = 5
+bottom_face = 4
+generate_occluders = true
+
+[node name="LevelBlock06" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+south_face = 6
+top_face = 5
+bottom_face = 4
+generate_occluders = true
+
+[node name="LevelBlock07" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 2)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+south_face = 0
+west_face = 0
+top_face = 5
+bottom_face = 4
+generate_occluders = true
+
+[node name="LevelBlock08" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 0)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+west_face = 0
+top_face = 5
+bottom_face = 4
+generate_occluders = true
+
+[node name="LevelBlock09" type="Node3D" parent="Blocks"]
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+bottom_face = 14
+generate_occluders = true
+
+[node name="FalseWall" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.02381, 0, 0.00627279)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+east_face = 9
+generate_occluders = true
+
+[node name="LevelBlock10" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+east_face = 1
+west_face = 2
+top_face = 5
+bottom_face = 10
+generate_occluders = true
+
+[node name="LevelBlock11" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+east_face = 0
+west_face = 0
+top_face = 5
+bottom_face = 10
+generate_occluders = true
+
+[node name="LevelBlock12" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+east_face = 0
+west_face = 0
+top_face = 5
+bottom_face = 10
+generate_occluders = true
+
+[node name="LevelBlock13" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+north_face = 6
+top_face = 5
+bottom_face = 10
+generate_occluders = true
+
+[node name="LevelBlock14" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -10)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+north_face = 0
+south_face = 0
+top_face = 5
+bottom_face = 10
+generate_occluders = true
+
+[node name="LevelBlock15" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -10)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+north_face = 0
+south_face = 0
+top_face = 5
+bottom_face = 10
+generate_occluders = true
+
+[node name="ButtonBlock2" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -10)
+script = ExtResource("6_o7oc8")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+north_face = 0
+south_face = 0
+west_face = 7
+bottom_face = 5
+generate_occluders = true
+
+[node name="LevelBlock17" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -10)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+north_face = 0
+south_face = 0
+top_face = 5
+bottom_face = 10
+generate_occluders = true
+
+[node name="LevelBlock18" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+north_face = 0
+east_face = 0
+south_face = 0
+west_face = 0
+top_face = 15
+generate_occluders = true
+
+[node name="LevelBlock19" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+north_face = 0
+south_face = 0
+top_face = 5
+bottom_face = 4
+generate_occluders = true
+
+[node name="LevelBlock20" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 0)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+south_face = 0
+top_face = 5
+bottom_face = 4
+generate_occluders = true
+
+[node name="LevelBlock21" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 0)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+south_face = 0
+west_face = 0
+top_face = 5
+bottom_face = 4
+generate_occluders = true
+
+[node name="LevelBlock22" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, -2)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+north_face = 0
+west_face = 0
+top_face = 5
+bottom_face = 4
+generate_occluders = true
+
+[node name="LevelBlock23" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -2)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+north_face = 0
+east_face = 0
+top_face = 5
+bottom_face = 4
+generate_occluders = true
+
+[node name="LevelBlock24" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -10)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+north_face = 0
+south_face = 0
+top_face = 5
+bottom_face = 10
+generate_occluders = true
+
+[node name="LevelBlock25" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -10)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+north_face = 6
+south_face = 0
+top_face = 5
+bottom_face = 4
+generate_occluders = true
+
+[node name="LevelBlock30" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -10)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+north_face = 6
+south_face = 0
+top_face = 5
+bottom_face = 10
+generate_occluders = true
+
+[node name="LevelBlock26" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, -10)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+north_face = 1
+south_face = 0
+top_face = 5
+bottom_face = 10
+generate_occluders = true
+
+[node name="LevelBlock27" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -10)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+south_face = 0
+top_face = 5
+bottom_face = 10
+generate_occluders = true
+
+[node name="LevelBlock28" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, -10)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+north_face = 2
+south_face = 0
+top_face = 5
+bottom_face = 10
+generate_occluders = true
+
+[node name="LevelBlock31" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -10)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+north_face = 0
+south_face = 0
+top_face = 5
+bottom_face = 4
+generate_occluders = true
+
+[node name="LevelBlock32" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, -10)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+north_face = 0
+south_face = 0
+top_face = 5
+bottom_face = 4
+generate_occluders = true
+
+[node name="LevelBlock33" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -10)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+north_face = 0
+east_face = 0
+south_face = 0
+top_face = 5
+bottom_face = 4
+generate_occluders = true
+
+[node name="LevelBlock34" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -12)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+east_face = 0
+west_face = 0
+top_face = 5
+bottom_face = 4
+generate_occluders = true
+
+[node name="LevelBlock35" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -14)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+east_face = 0
+west_face = 0
+top_face = 5
+bottom_face = 4
+generate_occluders = true
+
+[node name="LevelBlock36" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -16)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+north_face = 0
+east_face = 0
+west_face = 0
+top_face = 5
+bottom_face = 4
+generate_occluders = true
+
+[node name="LevelBlock29" type="Node3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -10)
+script = ExtResource("2_4f1nn")
+material = ExtResource("3_twohx")
+texture_sheet = ExtResource("5_mcnmu")
+north_face = 6
+south_face = 0
+top_face = 5
+bottom_face = 10
+generate_occluders = true
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+light_energy = 2.0
+omni_range = 6.0
+
+[node name="OmniLight2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
+light_color = Color(0.870588, 1, 0.74902, 1)
+omni_range = 6.0
+
+[node name="OmniLight3" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, -1)
+light_color = Color(1, 0.286275, 0.278431, 1)
+omni_range = 6.0
+
+[node name="OmniLight4" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+light_color = Color(1, 0.854902, 0.74902, 1)
+omni_range = 6.0
+
+[node name="OmniLight5" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -10)
+light_color = Color(1, 0.854902, 0.74902, 1)
+omni_range = 6.0
+
+[node name="OmniLight6" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -10)
+light_color = Color(1, 0.854902, 0.74902, 1)
+omni_range = 6.0
+
+[node name="OmniLight7" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -10)
+light_color = Color(0, 1, 0.329412, 1)
+omni_range = 6.0
+
+[node name="OmniLight8" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -15)
+light_color = Color(0.413378, 0.00126362, 0.607806, 1)
+omni_range = 6.0
+
+[node name="Doors" type="Node3D" parent="."]
+
+[node name="Door1" type="AnimatableBody3D" parent="Doors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4)
+script = ExtResource("7_o43el")
+
+[node name="Animation" type="AnimationPlayer" parent="Doors/Door1"]
+libraries = {
+"": SubResource("AnimationLibrary_06ubn")
+}
+
+[node name="Shape3D" type="CollisionShape3D" parent="Doors/Door1"]
+shape = SubResource("3")
+
+[node name="L" type="Node3D" parent="Doors/Door1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+
+[node name="Mesh" type="MeshInstance3D" parent="Doors/Door1/L"]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0.5, 0, 0)
+mesh = SubResource("4")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_pyiqm")
+
+[node name="R" type="Node3D" parent="Doors/Door1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+
+[node name="Mesh" type="MeshInstance3D" parent="Doors/Door1/R"]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, -0.5, 0, 0)
+material_override = SubResource("StandardMaterial3D_bsl20")
+mesh = SubResource("4")
+skeleton = NodePath("../..")
+
+[node name="Door2" type="AnimatableBody3D" parent="Doors"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, -12)
+script = ExtResource("7_o43el")
+
+[node name="Animation" type="AnimationPlayer" parent="Doors/Door2"]
+libraries = {
+"": SubResource("AnimationLibrary_06ubn")
+}
+
+[node name="Shape3D" type="CollisionShape3D" parent="Doors/Door2"]
+shape = SubResource("3")
+
+[node name="L" type="Node3D" parent="Doors/Door2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+
+[node name="Mesh" type="MeshInstance3D" parent="Doors/Door2/L"]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0.5, 0, 0)
+mesh = SubResource("4")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_pyiqm")
+
+[node name="R" type="Node3D" parent="Doors/Door2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+
+[node name="Mesh" type="MeshInstance3D" parent="Doors/Door2/R"]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, -0.5, 0, 0)
+material_override = SubResource("StandardMaterial3D_bsl20")
+mesh = SubResource("4")
+skeleton = NodePath("../..")
+
+[node name="Door3" type="AnimatableBody3D" parent="Doors"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 18, 0, -10)
+script = ExtResource("7_o43el")
+
+[node name="Animation" type="AnimationPlayer" parent="Doors/Door3"]
+libraries = {
+"": SubResource("AnimationLibrary_06ubn")
+}
+
+[node name="Shape3D" type="CollisionShape3D" parent="Doors/Door3"]
+shape = SubResource("3")
+
+[node name="L" type="Node3D" parent="Doors/Door3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)
+
+[node name="Mesh" type="MeshInstance3D" parent="Doors/Door3/L"]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, 0.5, 0, 0)
+mesh = SubResource("4")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_pyiqm")
+
+[node name="R" type="Node3D" parent="Doors/Door3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
+
+[node name="Mesh" type="MeshInstance3D" parent="Doors/Door3/R"]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 1, -0.5, 0, 0)
+material_override = SubResource("StandardMaterial3D_bsl20")
+mesh = SubResource("4")
+skeleton = NodePath("../..")
